@@ -1,0 +1,7 @@
+node-waf clean || true
+node-waf configure build
+if [ -f build/default/rlimit.node ]; then
+  cp build/default/rlimit.node lib
+elif [ -f build/Release/rlimit.node ]; then
+  cp build/Release/rlimit.node lib
+fi

@@ -1,2 +1,5 @@
 *.swp
+*.node
+build
+.lock*
 node_modules
