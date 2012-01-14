@@ -9,7 +9,7 @@ function resultPrinter( i ) {
 }
 
 // Example 1 - Standard JS
-s.run( "console.log(1);", resultPrinter(1) )
+s.run( "console.log(1)", resultPrinter(1) )
 /*
 // Example 2 - Something slightly more complex
 s.run( "(function(name) { return 'Hi there, ' + name + '!'; })('Fabio')", resultPrinter(2) )
