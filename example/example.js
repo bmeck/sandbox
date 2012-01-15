@@ -1,6 +1,12 @@
 var Sandbox = require("../lib/sandbox")
   , s = new Sandbox()
 
+s.use(Sandbox.timers);
+s.on('childmessage', function (msg, child) {
+  if (msg.type === 'stdout') console.log('STDOUT', msg.value);
+  if (msg.type === 'stderr') console.log('STDERR', msg.value);
+})
+
 function resultPrinter( i ) {
   return function ( error, output ) {
     console.log( "Example " + i +
@@ -9,7 +15,7 @@ function resultPrinter( i ) {
 }
 
 // Example 1 - Standard JS
-s.run( "console.log(1)", resultPrinter(1) )
+s.run( "console.error.constructor === Function", resultPrinter(1) )
 /*
 // Example 2 - Something slightly more complex
 s.run( "(function(name) { return 'Hi there, ' + name + '!'; })('Fabio')", resultPrinter(2) )
