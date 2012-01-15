@@ -2,20 +2,24 @@ var Sandbox = require("../lib/sandbox")
   , s = new Sandbox()
 
 s.use(Sandbox.timers);
-s.on('childmessage', function (msg, child) {
+s.on('child-message', function (msg, child) {
   if (msg.type === 'stdout') console.log('STDOUT', msg.value);
   if (msg.type === 'stderr') console.log('STDERR', msg.value);
 })
 
 function resultPrinter( i ) {
   return function ( error, output ) {
-    console.log( "Example " + i +
-      "\nError: \n" + error + "\nResult: \n" + (output && output.result) + "\n---\n")
+    console.log(
+      "Example " + i,
+      "\nError:", JSON.stringify(error),
+      "\nResult:", (output && output.result),
+      "\n---\n"
+    )
   }
 }
 
 // Example 1 - Standard JS
-s.run( "console.error.constructor === Function", resultPrinter(1) )
+s.run( "Foo.make()", resultPrinter(1) )
 /*
 // Example 2 - Something slightly more complex
 s.run( "(function(name) { return 'Hi there, ' + name + '!'; })('Fabio')", resultPrinter(2) )
