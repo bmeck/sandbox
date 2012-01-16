@@ -19,7 +19,7 @@ function resultPrinter( i ) {
 }
 
 // Example 1 - Standard JS
-s.run( "Foo.make()", resultPrinter(1) )
+s.run( "x=1;Foo.constructor('return x')()", resultPrinter(1) )
 /*
 // Example 2 - Something slightly more complex
 s.run( "(function(name) { return 'Hi there, ' + name + '!'; })('Fabio')", resultPrinter(2) )
