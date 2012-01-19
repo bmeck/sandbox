@@ -10,7 +10,7 @@
 , "directories" : { "lib" : "./lib" }
 , "scripts" : {
     "preinstall": "bash ./install"
-  , "test": "vows test/*-test.js"
+  , "test": "vows test/*-test.js --spec"
   }
 , "engines" : [ "node >=0.3.0-pre" ]
 , "dependencies" : {
