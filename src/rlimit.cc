@@ -12,6 +12,11 @@ Handle<Value> NodeUnref(const Arguments &args) {
   uv_unref(uv_default_loop());
   return scope.Close(Undefined());
 }
+Handle<Value> NodeRef(const Arguments &args) {
+  HandleScope scope;
+  uv_ref(uv_default_loop());
+  return scope.Close(Undefined());
+}
 
 Handle<Value> NodeGetrlimit(const Arguments &args) {
   HandleScope scope;
@@ -81,6 +86,7 @@ Handle<Value> NodeSetrlimit(const Arguments &args) {
 void Initialize(Handle<Object> target) {
   HandleScope scope;
   target->Set(String::New("unref"),FunctionTemplate::New(NodeUnref)->GetFunction());
+  target->Set(String::New("ref"),FunctionTemplate::New(NodeRef)->GetFunction());
   target->Set(String::New("getrlimit"),FunctionTemplate::New(NodeGetrlimit)->GetFunction());
   target->Set(String::New("getrusage"),FunctionTemplate::New(NodeGetrusage)->GetFunction());
   target->Set(String::New("setrlimit"),FunctionTemplate::New(NodeSetrlimit)->GetFunction());
