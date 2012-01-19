@@ -8,7 +8,10 @@
 , "version" : "0.8.2"
 , "main" : "./lib/sandbox"
 , "directories" : { "lib" : "./lib" }
-, "scripts" : { "preinstall": "bash ./install" }
+, "scripts" : {
+    "preinstall": "bash ./install"
+  , "test": "vows test/*-test.js"
+  }
 , "engines" : [ "node >=0.3.0-pre" ]
 , "dependencies" : {
     "broadway": "0.1.x"
@@ -16,7 +19,7 @@
   , "harmony-collections": "0.2.x"
   }
 , "devDependencies" :
-  { "async_testing": ">=0.3.0"
+  { "vows": "0.6.x"
   }
 , "repository" :
   { "type" : "git"
