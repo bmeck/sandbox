@@ -23,15 +23,17 @@ s.run( '1 + 1 + " apples"', function( output ) {
 
 ## Documentation
 
-Basic syntax: `sandbox_instance.run( code, hollaback )`
+Basic syntax: `sandbox_instance.run( code, callback )`
 
 `code` is the string of Javascript to be executed.
 
-`hollaback` is a function, and it's called with a single argument, `output`.
+`callback` is a function, and it's called with a two arguments, `err` and `output`.
 
-`output` is an object with two properties: `result` and `console`. The `result`
-property is an inspected string of the return value of the code. The `console`
-property is an array of all console output.
+`output` is an object with the following properties properties:
+
+`result` is an inspected string of the return value of the code.
+`console` is an array of all console output.
+`typeof` is the typeof the result (useful for when things do not encode as JSON).
 
 For example, given the following code:
 
@@ -49,6 +51,7 @@ The resulting output object is:
 ```javascript
 { result: "42"
 , console: [ "20", "22" ]
+, typeof: "number"
 }
 ```
 
