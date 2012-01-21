@@ -2,7 +2,7 @@ var vows = require('vows'),
   assert = require('assert'),
   helpers = require('./helpers.js'),
   Sandbox = require('../');
-vows.describe('error-test').addBatch({
+vows.describe('error-test')/*.addBatch({
     'When using a Sandbox with error with exitOnError': {
         topic: function () {
             this.sandbox = new Sandbox();
@@ -69,7 +69,7 @@ vows.describe('error-test').addBatch({
             assert.equal(result.result, true)
         }
     }
-}).addBatch({
+})*/.addBatch({
     'When using a plugin with an oob error': {
         topic: function () {
             this.sandbox = new Sandbox();
