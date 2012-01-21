@@ -56,7 +56,7 @@ vows.describe('security-test').addBatch({
             this.sandbox.run('for(;;);', this.callback.bind(this, null))
         },
         "infinite loops should timeout": function (err) {
-            assert.equal(err.code, 'SIGXCPU')
+            assert.equal(err.message, 'SIGXCPU')
         }
     }
 }).export(module);

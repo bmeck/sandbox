@@ -12,7 +12,7 @@ vows.describe('plugin-test').addBatch({
             })
             this.sandbox.use(require('./fixtures/sandbox-plugin-fixture'));
             this.sandbox.use(Sandbox.timers);
-            this.sandbox.run('test();setTimeout', this.callback);
+            this.sandbox.run('test();setTimeout', this.callback.bind(this));
         },
         'the plugin should load a runner plugin': function (result) {
             var msgs = this.events['child-message'].filter(function (msg) {
