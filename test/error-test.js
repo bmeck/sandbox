@@ -2,11 +2,13 @@ var vows = require('vows'),
   assert = require('assert'),
   helpers = require('./helpers.js'),
   Sandbox = require('../');
-vows.describe('error-test')/*.addBatch({
+vows.describe('error-test').addBatch({
     'When using a Sandbox with error with exitOnError': {
         topic: function () {
             this.sandbox = new Sandbox();
             this.sandbox.use(Sandbox.timers);
+            this.sandbox.config.set('rlimit:timeout', 0);
+            this.sandbox.config.set('options:persistent', true);
             var code = 'setTimeout(function() {print(1)},0);throw new Error("$")';
             var cb = this.callback.bind(this, null);
             this.child = helpers.queueEventsAndRun(this.sandbox, ['result', 'stdout'], code, cb)
@@ -33,8 +35,10 @@ vows.describe('error-test')/*.addBatch({
         topic: function () {
             this.sandbox = new Sandbox();
             this.sandbox.use(Sandbox.timers);
+            this.sandbox.config.set('rlimit:timeout', 0);
+            this.sandbox.config.set('options:persistent', true);
             this.sandbox.config.set('options:exitOnError', false);
-            var code = 'setTimeout(function() {print(1)},0);throw new Error("$")';
+            var code = 'setInterval(function() {print(1)},100);throw new Error("$")';
             var cb = this.callback.bind(this, null);
             this.child = helpers.queueEventsAndRun(this.sandbox, ['result', 'stdout'], code, cb)
         },
@@ -47,12 +51,13 @@ vows.describe('error-test')/*.addBatch({
         },
         'Should not kill the event loop': {
             topic: function () {
-                setTimeout(this.callback.bind(this), 2000);
+                var self = this;
+                this.child.on('stdout', this.callback.bind(this, null));
             },
             'and should allow timers to fire afterward': function () {
                var events = this.child.events['stdout'];
-               assert.equal(events, undefined);
-               this.child.kill();
+               assert.notEqual(events, undefined);
+               this.child.kill()
             }
         }
     }
@@ -69,7 +74,7 @@ vows.describe('error-test')/*.addBatch({
             assert.equal(result.result, true)
         }
     }
-})*/.addBatch({
+}).addBatch({
     'When using a plugin with an oob error': {
         topic: function () {
             this.sandbox = new Sandbox();
