@@ -47,7 +47,7 @@ vows.describe('error-test')/*.addBatch({
         },
         'Should not kill the event loop': {
             topic: function () {
-                setTimeout(this.callback.bind(this), 1000);
+                setTimeout(this.callback.bind(this), 2000);
             },
             'and should allow timers to fire afterward': function () {
                var events = this.child.events['stdout'];
