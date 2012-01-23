@@ -22,9 +22,6 @@ Functions are automatically GC'ed thanks to a WeakMap.
 2. Functions are cached so properties on Gunctions will only propagate the *first* time it crosses the bridge.
    This is to prevent stack overflows from multiple wrappings across a bridge.
 3. Some built ins are transferred as Object rather than their native counterparts (largely due to speed issues).
-3. * Errors
-3. * Dates
-3. * RegExps
 3. * ES Harmony Collections
 4. The 'this' keyword will will be a copy when crossing the bridge
 
