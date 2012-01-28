@@ -12,10 +12,10 @@
     "preinstall": "bash ./install"
   , "test": "vows test/*-test.js --spec"
   }
-, "engines" : [ "node >=0.3.0-pre" ]
+, "engines" : [ "node >=0.6.5" ]
 , "dependencies" : {
     "broadway": "0.1.x"
-  , "node-fork": "0.3.x"
+  , "node-fork": "0.4.x"
   , "harmony-collections": "0.2.x"
   }
 , "devDependencies" :
