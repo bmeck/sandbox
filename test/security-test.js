@@ -8,6 +8,7 @@ vows.describe('security-test').addBatch({
     'When using a Sandbox': {
         topic: function () {
             this.sandbox = new Sandbox();
+            this.sandbox.config.set('options:exitOnError', false)
             var events = this.events = {};
             this.sandbox.onAny(function() {
                 var queue = events[this.event] || (events[this.event] = []);
